@@ -1,7 +1,8 @@
 body {
   color: white;
   background-color: #E3E1E3;
-  font-family: monospace; }
+  font-family: monospace;
+}
 
 .button {
   box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.4);
@@ -11,51 +12,69 @@ body {
   padding-top: 10px;
   text-align: center;
   text-decoration: none;
-  width: 150px; }
-  .button:hover {
-    box-shadow: 5px 10px 15px rgba(255, 255, 0, 0.4);
-    font-weight: bold; }
+  width: 150px;
+}
+.button:hover {
+  box-shadow: 5px 10px 15px rgba(255, 255, 0, 0.4);
+  font-weight: bold;
+}
 
 .disabled {
-  background-color: #E84A5F; }
-  .disabled:hover {
-    background-color: #FF847C; }
+  background-color: #E84A5F;
+}
+.disabled:hover {
+  background-color: #FF847C;
+}
 
 .enabled {
-  background-color: #99B898; }
-  .enabled:hover {
-    background-color: #A8E6CE; }
+  background-color: #99B898;
+}
+.enabled:hover {
+  background-color: #A8E6CE;
+}
 
 .done {
-  background-color: #363636; }
-  .done:hover {
-    background-color: #594F4F; }
+  background-color: #363636;
+}
+.done:hover {
+  background-color: #594F4F;
+}
 
 div.selected {
   background-color: #EDE574;
-  color: black; }
-  div.selected:hover {
-    background-color: #F9D423; }
-  div.selected:active {
-    color: black; }
+  color: black;
+}
+div.selected:hover {
+  background-color: #F9D423;
+}
+div.selected:active {
+  color: black;
+}
 
 div.progress {
   float: right;
-  margin: 15px 30px 0 0; }
+  margin: 15px 30px 0 0;
+}
 
 .highlight {
   color: yellow;
-  font-weight: bold; }
-  .highlight-red {
-    box-shadow: 5px 10px 15px rgba(236, 32, 73, 0.4); }
-  .highlight-blue {
-    box-shadow: 5px 10px 15px rgba(45, 0, 250, 0.4); }
+  font-weight: bold;
+}
+.highlight-red {
+  box-shadow: 5px 10px 15px rgba(236, 32, 73, 0.4);
+}
+.highlight-blue {
+  box-shadow: 5px 10px 15px rgba(45, 0, 250, 0.4);
+}
 
 .semester {
+  border-bottom: 1px solid #594F4F;
   display: flex;
-  max-width: 85%; }
-  .semester .title {
-    color: black;
-    font-size: xx-large; }
+  max-width: 85%;
+}
+.semester .title {
+  color: black;
+  font-size: xx-large;
+}
 
 /*# sourceMappingURL=style.css.map */

@@ -58,7 +58,8 @@
       <div class="semester">
         <p class="title"><%= semester.number %></p>
         <% semester.subjects.forEach(function(subject) { %>
-          <div data-dependencies="<%= subject.dependencies %>"
+          <div title="<%= subject.long_name %>"
+               data-dependencies="<%= subject.dependencies %>"
                data-dependents="<%= subject.dependents %>"
                id="<%= subject._id %>"
                class="button <%= subject.class %>"
