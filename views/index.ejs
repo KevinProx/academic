@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/circle.css' />
+    <script type="text/javascript">
+      function hover(element) {
+        const dependencies = element.getAttribute("data-dependencies").split(",");
+
+        dependencies.forEach(function (id) {
+          document.getElementById(id).classList.add("highlight");
+          document.getElementById(id).classList.add("highlight-red");
+        });
+
+        const dependents = element.getAttribute("data-dependents").split(",");
+
+        dependents.forEach(function (id) {
+          document.getElementById(id).classList.add("highlight");
+          document.getElementById(id).classList.add("highlight-blue");
+        });
+      }
+
+      function out(element) {
+        const dependencies = element.getAttribute("data-dependencies").split(",");
+
+        dependencies.forEach(function (id) {
+          document.getElementById(id).classList.remove("highlight");
+          document.getElementById(id).classList.remove("highlight-red");
+        });
+
+        const dependents = element.getAttribute("data-dependents").split(",");
+
+        dependents.forEach(function (id) {
+          document.getElementById(id).classList.remove("highlight");
+          document.getElementById(id).classList.remove("highlight-blue");
+        });
+      }
+
+      function select(element) {
+        if (element.classList.contains("selected")) {
+          element.classList.remove("selected");
+        } else {
+          element.classList.add("selected");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="progress c100 p<%= percentage %> green">
+      <span><%= percentage %>%</span>
+      <div class="slice">
+        <div class="bar"></div>
+        <div class="fill"></div>
+      </div>
+    </div>
+    <% semesters.forEach(function(semester) { %>
+      <div class="semester">
+        <p class="title"><%= semester.number %></p>
+        <% semester.subjects.forEach(function(subject) { %>
+          <div data-dependencies="<%= subject.dependencies %>"
+               data-dependents="<%= subject.dependents %>"
+               id="<%= subject._id %>"
+               class="button <%= subject.class %>"
+               onmouseleave="out(this)"
+               onmouseover="hover(this)"
+               onclick="select(this)"><%= subject.short_name %></div>
+        <% }) %>
+      </div>
+    <% }); %>
+  </body>
+</html>

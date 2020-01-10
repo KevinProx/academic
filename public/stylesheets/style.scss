@@ -1,0 +1,86 @@
+body {
+  color: white;
+  background-color: #E3E1E3;
+  font-family: monospace;
+}
+
+.button {
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.4);
+  font-size: x-large;
+  height: 31px;
+  margin: 20px;
+  padding-top: 10px;
+  text-align: center;
+  text-decoration: none;
+  width: 150px;
+
+  &:hover {
+    box-shadow: 5px 10px 15px rgba(255, 255, 0, 0.4);
+    font-weight: bold;
+  }
+}
+
+.disabled {
+  background-color: #E84A5F;
+
+  &:hover {
+    background-color: #FF847C;
+  }
+}
+
+.enabled {
+  background-color: #99B898;
+
+  &:hover {
+    background-color: #A8E6CE;
+  }
+}
+
+.done {
+  background-color: #363636;
+
+  &:hover {
+    background-color: #594F4F;
+  }
+}
+
+div.selected {
+  background-color: #EDE574;
+  color: black;
+
+  &:hover {
+    background-color: #F9D423;
+  }
+
+  &:active {
+    color: black;
+  }
+}
+
+div.progress {
+  float: right;
+  margin: 15px 30px 0 0;
+}
+
+.highlight {
+  color: yellow;
+  font-weight: bold;
+
+  &-red {
+    box-shadow: 5px 10px 15px rgba(236, 32, 73, 0.4);
+  }
+
+  &-blue {
+    box-shadow: 5px 10px 15px rgba(45, 0, 250, 0.4);
+  }
+}
+
+.semester {
+  display: flex;
+  max-width: 85%;
+
+  & .title {
+    color: black;
+    font-size: xx-large;
+  }
+}
