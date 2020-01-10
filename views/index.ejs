@@ -9,12 +9,14 @@
         const dependencies = element.getAttribute("data-dependencies").split(",");
 
         dependencies.forEach(function (id) {
+          document.getElementById(id).classList.add("highlight");
           document.getElementById(id).classList.add("highlight-red");
         });
 
         const dependents = element.getAttribute("data-dependents").split(",");
 
         dependents.forEach(function (id) {
+          document.getElementById(id).classList.add("highlight");
           document.getElementById(id).classList.add("highlight-blue");
         });
       }
@@ -23,12 +25,14 @@
         const dependencies = element.getAttribute("data-dependencies").split(",");
 
         dependencies.forEach(function (id) {
+          document.getElementById(id).classList.remove("highlight");
           document.getElementById(id).classList.remove("highlight-red");
         });
 
         const dependents = element.getAttribute("data-dependents").split(",");
 
         dependents.forEach(function (id) {
+          document.getElementById(id).classList.remove("highlight");
           document.getElementById(id).classList.remove("highlight-blue");
         });
       }
