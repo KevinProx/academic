@@ -5,19 +5,39 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/circle.css' />
     <script type="text/javascript">
+      function hoverExam(element) {
+        let subject = document.getElementById(element.getAttribute("data-subject"));
+        select(subject);
+        hover(subject);
+      }
+
+      function outExam(element) {
+        let subject = document.getElementById(element.getAttribute("data-subject"));
+        deselect(subject);
+        out(subject);
+      }
+
       function hover(element) {
         const dependencies = element.getAttribute("data-dependencies").split(",");
 
         dependencies.forEach(function (id) {
-          document.getElementById(id).classList.add("highlight");
-          document.getElementById(id).classList.add("highlight-red");
+          let dependency = document.getElementById(id);
+
+          if (dependency) {
+            dependency.classList.add("highlight");
+            dependency.classList.add("highlight-red");
+          }
         });
 
         const dependents = element.getAttribute("data-dependents").split(",");
 
         dependents.forEach(function (id) {
-          document.getElementById(id).classList.add("highlight");
-          document.getElementById(id).classList.add("highlight-blue");
+          let dependent = document.getElementById(id);
+
+          if (dependent) {
+            dependent.classList.add("highlight");
+            dependent.classList.add("highlight-blue");
+          }
         });
       }
 
@@ -25,24 +45,40 @@
         const dependencies = element.getAttribute("data-dependencies").split(",");
 
         dependencies.forEach(function (id) {
-          document.getElementById(id).classList.remove("highlight");
-          document.getElementById(id).classList.remove("highlight-red");
+          let dependency = document.getElementById(id);
+
+          if (dependency) {
+            dependency.classList.remove("highlight");
+            dependency.classList.remove("highlight-red");
+          }
         });
 
         const dependents = element.getAttribute("data-dependents").split(",");
 
         dependents.forEach(function (id) {
-          document.getElementById(id).classList.remove("highlight");
-          document.getElementById(id).classList.remove("highlight-blue");
+          let dependent = document.getElementById(id);
+
+          if (dependent) {
+            dependent.classList.remove("highlight");
+            dependent.classList.remove("highlight-blue");
+          }
         });
       }
 
       function select(element) {
-        if (element.classList.contains("selected")) {
-          element.classList.remove("selected");
-        } else {
-          element.classList.add("selected");
-        }
+        element.classList.add("selected");
+      }
+
+      function deselect(element) {
+        element.classList.remove("selected");
+      }
+
+      function showModal() {
+        document.getElementById("add-exam-modal").classList.remove('hidden');
+      }
+
+      function closeModal() {
+        document.getElementById("add-exam-modal").classList.add('hidden');
       }
     </script>
   </head>
@@ -54,20 +90,49 @@
         <div class="fill"></div>
       </div>
     </div>
-    <% semesters.forEach(function(semester) { %>
-      <div class="semester">
-        <p class="title"><%= semester.number %></p>
-        <% semester.subjects.forEach(function(subject) { %>
-          <div title="<%= subject.long_name %>"
-               data-dependencies="<%= subject.dependencies %>"
-               data-dependents="<%= subject.dependents %>"
-               id="<%= subject._id %>"
-               class="button <%= subject.class %>"
-               onmouseleave="out(this)"
-               onmouseover="hover(this)"
-               onclick="select(this)"><%= subject.short_name %></div>
-        <% }) %>
-      </div>
-    <% }); %>
+    <p class="section-title">Semestres</p>
+    <div class="section">
+      <hr align="left">
+      <% semesters.forEach(function(semester) { %>
+        <div class="semester">
+          <p class="title"><%= semester.number %></p>
+          <% semester.subjects.forEach(function(subject) { %>
+            <div title="<%= subject.long_name %>"
+                 data-dependencies="<%= subject.dependencies %>"
+                 data-dependents="<%= subject.dependents %>"
+                 id="<%= subject._id %>"
+                 class="button <%= subject.class %>"
+                 onmouseleave="out(this)"
+                 onmouseover="hover(this)"><%= subject.short_name %></div>
+          <% }) %>
+        </div>
+        <hr align="left">
+      <% }); %>
+    </div>
+    <div class="section side">
+      <p class="section-title">Exámenes</p>
+      <hr align="right">
+      <% exams.forEach(function(exam) { %>
+        <div data-subject="<%= exam.subjectID %>" class="exam" onmouseover="hoverExam(this)" onmouseleave="outExam(this)">
+          <p class="name"><%= exam.subjectName %></p>
+          <p class="date"><%= exam.date %></p>
+        </div>
+        <hr align="right">
+      <% }) %>
+      <button class="add-exam" onclick="showModal()">Nuevo</button>
+    </div>
+    <div id="add-exam-modal" class="hidden">
+      <form action="/" method="post">
+        <select name="sub-name">
+          <option value="none">Materia</option>
+          <% subjects.forEach(function(subject) { %>
+            <option value="<%=  subject._id %>"><%= subject.long_name %></option>
+          <% }) %>
+        </select>
+        <input type="datetime-local" placeholder="Fecha" name="sub-date">
+        <button type="submit">Cargar</button>
+      </form>
+      <span onclick="closeModal()" class="close">X</span>
+    </div>
   </body>
 </html>
